@@ -3,32 +3,43 @@ import streamlit as st
 
 # Get raw text as string.
 st.title("What would Hafez say?")
-data = open("hafez.txt", mode="r", encoding='utf-8').read()
 
 
 @st.cache  # cache the result of the hafez.txt file
-def get_model():
-    tex = markovify.Text(data)
-    return tex
+def get_data():
+    with open("hafez.txt", "r", encoding="utf-8") as f:
+        text = f.read()
+    return text
 
 
-model = get_model()
+data = get_data()
 
+
+# Build the model.
+@st.cache
+def build_model():
+    get_data()
+    model = markovify.Text(data)
+    return model
+
+
+m = build_model()
 # ask user how many sentences to generate
 st.sidebar.markdown("How many sentences would you like to generate?")
-num_sentences = st.sidebar.slider("Sentences", min_value=1, max_value=4)
+num_sentences = st.sidebar.slider("Sentences", min_value=2, max_value=4)
 st.sidebar.markdown("How many characters would you like to generate for each sentence?")
-num_words = st.sidebar.slider("Sentences", min_value=20, max_value=280)
+num_words = st.sidebar.slider("Sentences", min_value=100, max_value=280)
 
 
 # Generate a sentence.
 @st.cache
 def generate_sentence():
     for i in range(num_sentences):
-        sentence = model.make_sentence()
-        sentece2 = model.make_short_sentence(num_words)
-        return sentence, sentece2
+        sentence = m.make_short_sentence(num_words)
+        return sentence
 
+
+s = generate_sentence()
 
 # show the generated sentence
-st.write("Hafez wants to tell you: ", generate_sentence())
+st.write("Hafez wants to tell you: ", s)
