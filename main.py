@@ -30,7 +30,7 @@ m = build_model()
 st.sidebar.markdown("How many sentences would you like to generate?")
 num_sentences = st.sidebar.slider("Sentences", min_value=2, max_value=4)
 st.sidebar.markdown("How many characters would you like to generate for each sentence?")
-num_words = st.sidebar.slider("Sentences", min_value=100, max_value=280)
+num_words = st.sidebar.slider("Sentences", min_value=200, max_value=500)
 
 
 # Generate a sentence.
