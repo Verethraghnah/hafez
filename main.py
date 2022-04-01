@@ -1,6 +1,8 @@
 import markovify
 import streamlit as st
-
+from PIL import Image
+image = Image.open('App.jpg')
+st.image(image, caption='What would Hafez say?')
 # Get raw text as string.
 st.title("What would Hafez say?")
 
@@ -42,4 +44,4 @@ def generate_sentence():
 s = generate_sentence()
 
 # show the generated sentence
-st.write("Hafez wants to tell you: ", s)
+st.write("##Hafez wants to tell you: ", s)
