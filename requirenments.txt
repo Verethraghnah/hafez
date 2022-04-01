@@ -1,5 +1,5 @@
 streamlit==0.82.0
-markovify==0.2.3
+markovify==0.9.4
 matplotlib==3.3.2
 plotly==4.14.3
 pystan==2.19.1.1
